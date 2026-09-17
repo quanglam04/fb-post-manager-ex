@@ -14,9 +14,6 @@
  */
 
 const FB_DOC_IDS = {
-  // Xóa bài viết khỏi timeline
-  DELETE_POST: "26146132388368957",
-
   // Đổi quyền riêng tư bài viết
   SET_POST_PRIVACY: "28375855785348843",
 
