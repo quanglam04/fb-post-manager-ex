@@ -3,18 +3,13 @@
  * Nhiệm vụ: Message bridge giữa Dashboard và Content Script trên Facebook
  */
 
-// Mở dashboard khi click vào extension icon
-chrome.action.onClicked.addListener(() => {
-  chrome.tabs.create({ url: chrome.runtime.getURL("dashboard/index.html") });
-});
-
 /**
  * Tìm tab Facebook đang mở
  */
 async function findFacebookTab() {
   const tabs = await chrome.tabs.query({ url: "https://www.facebook.com/*" });
   // Ưu tiên tab đang active, nếu không có thì lấy tab đầu tiên
-  const activeTab = tabs.find(t => t.active);
+  const activeTab = tabs.find((t) => t.active);
   return activeTab || tabs[0] || null;
 }
 
@@ -28,15 +23,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
 
   if (msg.type === "CHECK_FB_TAB") {
-    findFacebookTab().then(tab => {
+    findFacebookTab().then((tab) => {
       sendResponse({ found: !!tab, tabId: tab?.id || null });
     });
-    return true;
-  }
-
-  if (msg.type === "OPEN_DASHBOARD") {
-    chrome.tabs.create({ url: chrome.runtime.getURL("dashboard/index.html") });
-    sendResponse({ ok: true });
     return true;
   }
 });
@@ -48,7 +37,8 @@ async function handleFbAction(msg, sendResponse) {
     if (!fbTab) {
       sendResponse({
         success: false,
-        error: "Hãy mở Facebook trong một tab khác trước khi sử dụng tính năng này."
+        error:
+          "Hãy mở Facebook trong một tab khác trước khi sử dụng tính năng này.",
       });
       return;
     }
@@ -57,7 +47,7 @@ async function handleFbAction(msg, sendResponse) {
     try {
       await chrome.scripting.executeScript({
         target: { tabId: fbTab.id },
-        files: ["content/facebook.js"]
+        files: ["content/facebook.js"],
       });
     } catch (_) {
       // Content script có thể đã được inject, bỏ qua lỗi
@@ -68,7 +58,8 @@ async function handleFbAction(msg, sendResponse) {
       if (chrome.runtime.lastError) {
         sendResponse({
           success: false,
-          error: "Không thể kết nối đến Facebook tab. Hãy thử reload trang Facebook."
+          error:
+            "Không thể kết nối đến Facebook tab. Hãy thử reload trang Facebook.",
         });
       } else {
         sendResponse(response);
