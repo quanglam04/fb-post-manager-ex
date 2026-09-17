@@ -1,3 +1,4 @@
 function transfer(amount) {
-  console.log(amount);
+  debit(amount);
+  // không publish
 }
