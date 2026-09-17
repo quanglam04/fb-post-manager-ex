@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FB Manager — Dashboard</title>
+  <meta name="description" content="Quản lý bài viết, nhóm và bạn bè Facebook của bạn với FB Manager Dashboard." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-layout">
+
+    <!-- ── Sidebar ───────────────────────────────────── -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-row">
+          <div class="logo-icon">FM</div>
+          <div>
+            <div class="logo-name">FB Manager</div>
+            <div class="logo-tag">v1.0.0</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Tổng quan</div>
+        <button class="nav-item active" id="nav-home" data-section="home">
+          <span class="nav-icon">🏠</span>
+          <span>Dashboard</span>
+        </button>
+
+        <div class="nav-section-label" style="margin-top:10px">Quản lý</div>
+        <button class="nav-item" id="nav-posts" data-section="posts">
+          <span class="nav-icon">📝</span>
+          <span>My Posts</span>
+          <span class="nav-badge" id="nav-posts-badge" style="display:none"></span>
+        </button>
+        <button class="nav-item" id="nav-groups" data-section="groups">
+          <span class="nav-icon">👥</span>
+          <span>Joined Groups</span>
+          <span class="nav-badge" id="nav-groups-badge" style="display:none"></span>
+        </button>
+        <button class="nav-item" id="nav-friends" data-section="friends">
+          <span class="nav-icon">❤️</span>
+          <span>Friends</span>
+          <span class="nav-badge" id="nav-friends-badge" style="display:none"></span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-row">
+          <div class="user-avatar" id="user-avatar">?</div>
+          <div class="user-info">
+            <div class="user-name" id="user-name">Khách</div>
+            <div class="user-status" id="user-status">Chưa kết nối</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── Main Content ───────────────────────────────── -->
+    <main class="main-content" id="main-content">
+      <!-- Sections are rendered dynamically by app.js -->
+      <div id="section-root"></div>
+    </main>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
